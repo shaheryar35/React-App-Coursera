@@ -9,8 +9,10 @@ import Contact from './ContactusComponent';
 import {COMMENTS} from '../shared/comments';
 import {LEADERS} from '../shared/leaders';
 import {PROMOTIONS} from '../shared/promotions';
-import {Switch, Route, Redirect } from 'react-router-dom';
-import { Form } from 'reactstrap';
+import About from './AboutComponent';
+import Formss from './TempContactusComponent';
+import {Switch, Route, Redirect, Router } from 'react-router-dom';
+
 class Main extends Component {
 
    constructor(props){
@@ -31,14 +33,23 @@ class Main extends Component {
           />
       );
     }
+    const DishWithId = ({match}) => {
+      return(
+          <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
+            comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+      );
+    };
     return (
       <div>
         <Header />
         <Switch>
           <Route path="/home" component={HomePage} />
           <Route exact path="/menu" component={()=> <Menu dishes={this.state.dishes} />} />
+          <Route exact path="/aboutus" component={() => <About leaders={this.state.leaders}/>} />
+          <Router path="/menu:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
-          <Redirect to ="/home" />
+          <Route path="/pra" component={Formss} />
+         
 
         </Switch>
      

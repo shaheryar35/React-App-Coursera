@@ -46,6 +46,12 @@ return(
                 </NavLink>
             </NavItem>
 
+            <NavItem>
+                <NavLink className="nav-link" to="/pra">
+                    <span className="fa fa-address-card fa-large"></span> Temp Component
+                </NavLink>
+            </NavItem>
+
 
             </Nav>
             </Collapse>
