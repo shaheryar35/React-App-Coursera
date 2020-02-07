@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardImg, CardImgOverlay,
-    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
     import{Link} from 'react-router-dom'
     function RenderMenuItem ({dish}) {
         return (
@@ -40,7 +40,9 @@ import { Card, CardImg, CardImgOverlay,
                 </div>
                 <div className="row">
                     {menu}
+                    
                 </div>
+                
             </div>
         );
     }
