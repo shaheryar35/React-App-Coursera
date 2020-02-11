@@ -9,7 +9,7 @@ import Contact from './ContactusComponent';
 
 import About from './AboutComponent';
 import Formss from './TempContactusComponent';
-import {Switch, Route, Redirect, Router,withRouter } from 'react-router-dom';
+import {Switch, Route, Redirect, BrowserRouter as Router ,withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 const mapStateToProps = state=>{
@@ -37,27 +37,36 @@ class Main extends Component {
           />
       );
     }
-    const DishWithId = ({match}) => {
-      return(
-          <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
-            comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+    const DishWithId = ({ match }) => {
+      return (
+        <DishDetail
+          dish={
+            this.props.dishes.filter(
+              dish => dish.id === parseInt(match.params.dishId, 10),
+            )[0]
+          }
+          comments={this.props.comments.filter(
+            com => com.dishId === parseInt(match.params.dishId, 10),
+          )}
+        />
       );
     };
     return (
-      <div>
+      <div className='App'>
         <Header />
         <Switch>
-          <Route path="/home" component={HomePage} />
-          <Route exact path="/menu" component={()=> <Menu dishes={this.props.dishes} />} />
-          <Route exact path="/aboutus" component={() => <About leaders={this.props.leaders}/>} />
-          <Router path="/menu:dishId" component={DishWithId} />
-          <Route exact path="/contactus" component={Contact} />
-          <Route path="/pra" component={Formss} />
-         
-
+          <Route exact path='/' component={HomePage} />
+          <Route path='/aboutus' component={About} />
+          <Route
+            exact
+            path='/menu'
+            component={() => <Menu dishes={this.props.dishes} />}
+          />
+          <Route path='/menu/:dishId' component={DishWithId} />
+          <Route path='/contactus' component={Contact} />
+          <Redirect to='/' />
         </Switch>
-     
-      <Footer />
+        <Footer />
       </div>
     );
   }
